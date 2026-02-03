@@ -1,0 +1,1356 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Salão Beleza & Estética - Painel da Cabeleireira</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f9f5f0;
+            color: #5a4a42;
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Cabeçalho do Painel */
+        .panel-header {
+            background: linear-gradient(to right, #d4a5a5, #f9d6c1);
+            padding: 20px 0;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .panel-header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo i {
+            font-size: 2.5rem;
+            color: #9c6a5b;
+            margin-right: 15px;
+        }
+
+        .logo h1 {
+            font-size: 2.2rem;
+            color: #5a4a42;
+        }
+
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .user-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: #9c6a5b;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        .user-details h3 {
+            font-size: 1.2rem;
+            margin-bottom: 5px;
+        }
+
+        .user-details p {
+            font-size: 0.9rem;
+            color: #8a7a72;
+        }
+
+        /* Navegação do Painel */
+        .panel-nav {
+            background-color: white;
+            padding: 15px 0;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+            margin-bottom: 30px;
+        }
+
+        .panel-nav ul {
+            display: flex;
+            list-style: none;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .panel-nav li {
+            margin: 0 5px;
+        }
+
+        .panel-nav a {
+            text-decoration: none;
+            color: #5a4a42;
+            font-weight: 600;
+            font-size: 1rem;
+            padding: 10px 20px;
+            border-radius: 30px;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .panel-nav a:hover, .panel-nav a.active {
+            background-color: #f9d6c1;
+            color: #5a4a42;
+        }
+
+        .panel-nav a i {
+            font-size: 1.1rem;
+        }
+
+        /* Conteúdo Principal */
+        .main-content {
+            padding: 20px 0 60px;
+        }
+
+        .page-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .page-title {
+            font-size: 2rem;
+            color: #5a4a42;
+            position: relative;
+            display: inline-block;
+        }
+
+        .page-title::after {
+            content: '';
+            position: absolute;
+            width: 70%;
+            height: 3px;
+            background-color: #d4a5a5;
+            bottom: -10px;
+            left: 0;
+        }
+
+        .stats-summary {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .stat-card {
+            background-color: white;
+            padding: 15px 25px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            min-width: 200px;
+        }
+
+        .stat-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+        }
+
+        .stat-icon.pending {
+            background-color: #fff3e0;
+            color: #f57c00;
+        }
+
+        .stat-icon.confirmed {
+            background-color: #e8f5e9;
+            color: #2e7d32;
+        }
+
+        .stat-icon.canceled {
+            background-color: #ffebee;
+            color: #c62828;
+        }
+
+        .stat-info h3 {
+            font-size: 1.8rem;
+            margin-bottom: 5px;
+        }
+
+        .stat-info p {
+            color: #8a7a72;
+            font-size: 0.9rem;
+        }
+
+        /* Filtros */
+        .filters {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+
+        .filters h3 {
+            margin-bottom: 15px;
+            color: #5a4a42;
+            font-size: 1.2rem;
+        }
+
+        .filter-controls {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .filter-group {
+            flex: 1;
+            min-width: 200px;
+        }
+
+        .filter-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #5a4a42;
+        }
+
+        .filter-group select, .filter-group input {
+            width: 100%;
+            padding: 10px 15px;
+            border: 2px solid #e6d5cb;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+
+        .filter-group select:focus, .filter-group input:focus {
+            border-color: #d4a5a5;
+            outline: none;
+        }
+
+        .filter-actions {
+            display: flex;
+            align-items: flex-end;
+            gap: 10px;
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: #d4a5a5;
+            color: white;
+            padding: 10px 25px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1rem;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.3s;
+            text-align: center;
+        }
+
+        .btn:hover {
+            background-color: #9c6a5b;
+            transform: translateY(-3px);
+        }
+
+        .btn-secondary {
+            background-color: #8a7a72;
+        }
+
+        .btn-secondary:hover {
+            background-color: #5a4a42;
+        }
+
+        .btn-success {
+            background-color: #2e7d32;
+        }
+
+        .btn-success:hover {
+            background-color: #1b5e20;
+        }
+
+        .btn-danger {
+            background-color: #c62828;
+        }
+
+        .btn-danger:hover {
+            background-color: #b71c1c;
+        }
+
+        /* Tabela de Agendamentos */
+        .appointments-table {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            margin-bottom: 40px;
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        thead {
+            background-color: #f9d6c1;
+        }
+
+        th {
+            padding: 18px 15px;
+            text-align: left;
+            font-weight: 600;
+            color: #5a4a42;
+            border-bottom: 2px solid #e6d5cb;
+        }
+
+        td {
+            padding: 15px;
+            border-bottom: 1px solid #e6d5cb;
+        }
+
+        tbody tr {
+            transition: background-color 0.3s;
+        }
+
+        tbody tr:hover {
+            background-color: #f9f5f0;
+        }
+
+        .client-info {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .client-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: #9c6a5b;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 1rem;
+        }
+
+        .client-details h4 {
+            font-size: 1rem;
+            margin-bottom: 3px;
+        }
+
+        .client-details p {
+            font-size: 0.85rem;
+            color: #8a7a72;
+        }
+
+        .service-info {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .service-icon {
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            background-color: #f9d6c1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #9c6a5b;
+            font-size: 1rem;
+        }
+
+        .service-details h4 {
+            font-size: 1rem;
+            margin-bottom: 3px;
+        }
+
+        .service-details p {
+            font-size: 0.85rem;
+            color: #8a7a72;
+        }
+
+        .status-badge {
+            display: inline-block;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-align: center;
+        }
+
+        .status-pending {
+            background-color: #fff3e0;
+            color: #f57c00;
+        }
+
+        .status-confirmed {
+            background-color: #e8f5e9;
+            color: #2e7d32;
+        }
+
+        .status-canceled {
+            background-color: #ffebee;
+            color: #c62828;
+        }
+
+        .status-completed {
+            background-color: #e3f2fd;
+            color: #1565c0;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .action-btn {
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            border: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 1rem;
+        }
+
+        .action-btn.confirm {
+            background-color: #e8f5e9;
+            color: #2e7d32;
+        }
+
+        .action-btn.confirm:hover {
+            background-color: #2e7d32;
+            color: white;
+        }
+
+        .action-btn.cancel {
+            background-color: #ffebee;
+            color: #c62828;
+        }
+
+        .action-btn.cancel:hover {
+            background-color: #c62828;
+            color: white;
+        }
+
+        .action-btn.complete {
+            background-color: #e3f2fd;
+            color: #1565c0;
+        }
+
+        .action-btn.complete:hover {
+            background-color: #1565c0;
+            color: white;
+        }
+
+        .action-btn.view {
+            background-color: #f3e5f5;
+            color: #7b1fa2;
+        }
+
+        .action-btn.view:hover {
+            background-color: #7b1fa2;
+            color: white;
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .modal-content {
+            background-color: white;
+            border-radius: 15px;
+            width: 100%;
+            max-width: 500px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            overflow: hidden;
+        }
+
+        .modal-header {
+            background: linear-gradient(to right, #d4a5a5, #f9d6c1);
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .modal-header h3 {
+            color: #5a4a42;
+            font-size: 1.5rem;
+        }
+
+        .modal-close {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: #5a4a42;
+            cursor: pointer;
+        }
+
+        .modal-body {
+            padding: 25px;
+        }
+
+        .modal-details {
+            margin-bottom: 25px;
+        }
+
+        .detail-row {
+            display: flex;
+            margin-bottom: 15px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #e6d5cb;
+        }
+
+        .detail-label {
+            flex: 1;
+            font-weight: 600;
+            color: #5a4a42;
+        }
+
+        .detail-value {
+            flex: 2;
+            color: #8a7a72;
+        }
+
+        .modal-actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: 15px;
+            margin-top: 25px;
+        }
+
+        /* Rodapé */
+        footer {
+            background-color: #5a4a42;
+            color: #f9d6c1;
+            padding: 40px 0 20px;
+            text-align: center;
+            margin-top: 40px;
+        }
+
+        .footer-content {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            margin-bottom: 30px;
+        }
+
+        .footer-column {
+            flex: 1;
+            min-width: 250px;
+            margin-bottom: 30px;
+            padding: 0 20px;
+        }
+
+        .footer-column h3 {
+            font-size: 1.4rem;
+            margin-bottom: 20px;
+            color: #f9d6c1;
+        }
+
+        .footer-column p, .footer-column a {
+            color: #e6d5cb;
+            margin-bottom: 10px;
+            display: block;
+            text-decoration: none;
+        }
+
+        .footer-column a:hover {
+            color: white;
+        }
+
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            margin-top: 15px;
+        }
+
+        .social-icons a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: #8a7a72;
+            color: white;
+            border-radius: 50%;
+            margin: 0 8px;
+            font-size: 1.2rem;
+            transition: background-color 0.3s;
+        }
+
+        .social-icons a:hover {
+            background-color: #d4a5a5;
+        }
+
+        .copyright {
+            border-top: 1px solid #8a7a72;
+            padding-top: 20px;
+            color: #e6d5cb;
+            font-size: 0.9rem;
+        }
+
+        /* Responsividade */
+        @media (max-width: 992px) {
+            .panel-header-content {
+                flex-direction: column;
+                gap: 20px;
+            }
+            
+            .page-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .stats-summary {
+                width: 100%;
+            }
+            
+            .stat-card {
+                flex: 1;
+                min-width: 150px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .panel-nav ul {
+                justify-content: center;
+            }
+            
+            .filter-controls {
+                flex-direction: column;
+            }
+            
+            .filter-actions {
+                width: 100%;
+                justify-content: center;
+            }
+            
+            th, td {
+                padding: 12px 8px;
+                font-size: 0.9rem;
+            }
+            
+            .action-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .action-btn {
+                width: 30px;
+                height: 30px;
+                font-size: 0.9rem;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .logo h1 {
+                font-size: 1.8rem;
+            }
+            
+            .page-title {
+                font-size: 1.6rem;
+            }
+            
+            .stat-card {
+                min-width: 100%;
+            }
+            
+            .client-info, .service-info {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 5px;
+            }
+            
+            .modal-body {
+                padding: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Cabeçalho do Painel -->
+    <header class="panel-header">
+        <div class="container">
+            <div class="panel-header-content">
+                <div class="logo">
+                    <i class="fas fa-spa"></i>
+                    <h1>Painel da Cabeleireira</h1>
+                </div>
+                
+                <div class="user-info">
+                    <div class="user-avatar">MC</div>
+                    <div class="user-details">
+                        <h3>Maria Clara</h3>
+                        <p>Cabeleireira Sênior</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Navegação do Painel -->
+    <nav class="panel-nav">
+        <div class="container">
+            <ul>
+                <li><a href="#" class="active"><i class="fas fa-calendar-alt"></i> Agendamentos</a></li>
+                <li><a href="#"><i class="fas fa-users"></i> Clientes</a></li>
+                <li><a href="#"><i class="fas fa-chart-bar"></i> Relatórios</a></li>
+                <li><a href="#"><i class="fas fa-clock"></i> Horários</a></li>
+                <li><a href="#"><i class="fas fa-cog"></i> Configurações</a></li>
+                <li><a href="index.html"><i class="fas fa-sign-out-alt"></i> Sair</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Conteúdo Principal -->
+    <main class="main-content">
+        <div class="container">
+            <!-- Cabeçalho da Página -->
+            <div class="page-header">
+                <h2 class="page-title">Gerenciar Agendamentos</h2>
+                
+                <div class="stats-summary">
+                    <div class="stat-card">
+                        <div class="stat-icon pending">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3 id="pendingCount">5</h3>
+                            <p>Pendentes</p>
+                        </div>
+                    </div>
+                    
+                    <div class="stat-card">
+                        <div class="stat-icon confirmed">
+                            <i class="fas fa-check-circle"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3 id="confirmedCount">12</h3>
+                            <p>Confirmados</p>
+                        </div>
+                    </div>
+                    
+                    <div class="stat-card">
+                        <div class="stat-icon canceled">
+                            <i class="fas fa-times-circle"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3 id="canceledCount">2</h3>
+                            <p>Cancelados</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Filtros -->
+            <div class="filters">
+                <h3>Filtrar Agendamentos</h3>
+                <div class="filter-controls">
+                    <div class="filter-group">
+                        <label for="filterDate">Data</label>
+                        <input type="date" id="filterDate">
+                    </div>
+                    
+                    <div class="filter-group">
+                        <label for="filterStatus">Status</label>
+                        <select id="filterStatus">
+                            <option value="all">Todos os status</option>
+                            <option value="pending">Pendente</option>
+                            <option value="confirmed">Confirmado</option>
+                            <option value="canceled">Cancelado</option>
+                            <option value="completed">Concluído</option>
+                        </select>
+                    </div>
+                    
+                    <div class="filter-group">
+                        <label for="filterService">Serviço</label>
+                        <select id="filterService">
+                            <option value="all">Todos os serviços</option>
+                            <option value="cabelo">Cabelo</option>
+                            <option value="unhas">Unhas</option>
+                            <option value="sobrancelha">Sobrancelha</option>
+                            <option value="cilios">Cílios</option>
+                        </select>
+                    </div>
+                    
+                    <div class="filter-actions">
+                        <button class="btn" id="applyFilters">Aplicar Filtros</button>
+                        <button class="btn btn-secondary" id="resetFilters">Limpar Filtros</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tabela de Agendamentos -->
+            <div class="appointments-table">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Cliente</th>
+                            <th>Serviço</th>
+                            <th>Data/Hora</th>
+                            <th>Status</th>
+                            <th>Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody id="appointmentsList">
+                        <!-- Os agendamentos serão carregados aqui via JavaScript -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </main>
+
+    <!-- Modal de Detalhes do Agendamento -->
+    <div class="modal" id="appointmentModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Detalhes do Agendamento</h3>
+                <button class="modal-close" id="closeModal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="modal-details" id="modalDetails">
+                    <!-- Detalhes serão preenchidos via JavaScript -->
+                </div>
+                <div class="modal-actions" id="modalActions">
+                    <!-- Ações serão preenchidas via JavaScript -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Rodapé -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>Salão Beleza & Estética</h3>
+                    <p>Especializados em realçar sua beleza natural com serviços de alta qualidade.</p>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Horário de Funcionamento</h3>
+                    <p>Segunda a Sexta: 8h às 19h</p>
+                    <p>Sábado: 8h às 17h</p>
+                    <p>Domingo: Fechado</p>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Contato</h3>
+                    <p><i class="fas fa-map-marker-alt"></i> Rua das Belezas, 123 - Centro</p>
+                    <p><i class="fas fa-phone"></i> (11) 9999-8888</p>
+                    <p><i class="fas fa-envelope"></i> contato@salaobeleza.com</p>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2023 Salão Beleza & Estética. Todos os direitos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Dados de exemplo para agendamentos
+        const appointments = [
+            {
+                id: 1,
+                clientName: "Ana Silva",
+                clientEmail: "ana.silva@email.com",
+                clientPhone: "(11) 98765-4321",
+                service: "cabelo",
+                serviceName: "Corte e Hidratação",
+                date: "2023-11-20",
+                time: "14:30",
+                duration: "60 min",
+                price: "R$ 85,00",
+                status: "pending",
+                notes: "Cliente prefere corte em camadas"
+            },
+            {
+                id: 2,
+                clientName: "Carlos Santos",
+                clientEmail: "carlos.s@email.com",
+                clientPhone: "(11) 97654-3210",
+                service: "unhas",
+                serviceName: "Manicure e Pedicure",
+                date: "2023-11-20",
+                time: "10:00",
+                duration: "90 min",
+                price: "R$ 65,00",
+                status: "confirmed",
+                notes: "Sem preferência de cor"
+            },
+            {
+                id: 3,
+                clientName: "Beatriz Lima",
+                clientEmail: "bia.lima@email.com",
+                clientPhone: "(11) 96543-2109",
+                service: "cabelo",
+                serviceName: "Coloração + Luzes",
+                date: "2023-11-21",
+                time: "09:00",
+                duration: "120 min",
+                price: "R$ 180,00",
+                status: "confirmed",
+                notes: "Trazer amostra de cor desejada"
+            },
+            {
+                id: 4,
+                clientName: "Fernanda Oliveira",
+                clientEmail: "fe.oliveira@email.com",
+                clientPhone: "(11) 95432-1098",
+                service: "sobrancelha",
+                serviceName: "Design + Henna",
+                date: "2023-11-21",
+                time: "15:00",
+                duration: "40 min",
+                price: "R$ 35,00",
+                status: "pending",
+                notes: ""
+            },
+            {
+                id: 5,
+                clientName: "Roberta Costa",
+                clientEmail: "roberta.c@email.com",
+                clientPhone: "(11) 94321-0987",
+                service: "cilios",
+                serviceName: "Alongamento Fio a Fio",
+                date: "2023-11-22",
+                time: "11:30",
+                duration: "90 min",
+                price: "R$ 120,00",
+                status: "confirmed",
+                notes: "Primeira vez fazendo o procedimento"
+            },
+            {
+                id: 6,
+                clientName: "Juliana Mendes",
+                clientEmail: "ju.mendes@email.com",
+                clientPhone: "(11) 93210-9876",
+                service: "cabelo",
+                serviceName: "Corte Masculino",
+                date: "2023-11-22",
+                time: "16:00",
+                duration: "30 min",
+                price: "R$ 40,00",
+                status: "canceled",
+                notes: "Cliente cancelou por motivo de saúde"
+            },
+            {
+                id: 7,
+                clientName: "Patrícia Almeida",
+                clientEmail: "paty.almeida@email.com",
+                clientPhone: "(11) 92109-8765",
+                service: "unhas",
+                serviceName: "Alongamento em Gel",
+                date: "2023-11-23",
+                time: "13:00",
+                duration: "120 min",
+                price: "R$ 110,00",
+                status: "pending",
+                notes: "Quer nail art simples"
+            },
+            {
+                id: 8,
+                clientName: "Tatiane Souza",
+                clientEmail: "tati.souza@email.com",
+                clientPhone: "(11) 91098-7654",
+                service: "cabelo",
+                serviceName: "Escova Progressiva",
+                date: "2023-11-23",
+                time: "09:30",
+                duration: "150 min",
+                price: "R$ 250,00",
+                status: "completed",
+                notes: "Retorno após 30 dias para manutenção"
+            }
+        ];
+
+        // Elementos DOM
+        const appointmentsList = document.getElementById('appointmentsList');
+        const appointmentModal = document.getElementById('appointmentModal');
+        const closeModal = document.getElementById('closeModal');
+        const modalDetails = document.getElementById('modalDetails');
+        const modalActions = document.getElementById('modalActions');
+        const filterDate = document.getElementById('filterDate');
+        const filterStatus = document.getElementById('filterStatus');
+        const filterService = document.getElementById('filterService');
+        const applyFilters = document.getElementById('applyFilters');
+        const resetFilters = document.getElementById('resetFilters');
+        const pendingCount = document.getElementById('pendingCount');
+        const confirmedCount = document.getElementById('confirmedCount');
+        const canceledCount = document.getElementById('canceledCount');
+
+        // Variáveis de estado
+        let currentAppointment = null;
+        let filteredAppointments = [...appointments];
+
+        // Inicializar data do filtro como hoje
+        const today = new Date().toISOString().split('T')[0];
+        filterDate.value = today;
+
+        // Função para renderizar agendamentos
+        function renderAppointments() {
+            appointmentsList.innerHTML = '';
+            
+            // Contadores por status
+            let pending = 0;
+            let confirmed = 0;
+            let canceled = 0;
+            
+            filteredAppointments.forEach(appointment => {
+                // Atualizar contadores
+                if (appointment.status === 'pending') pending++;
+                if (appointment.status === 'confirmed') confirmed++;
+                if (appointment.status === 'canceled') canceled++;
+                
+                // Formatar data
+                const dateObj = new Date(appointment.date);
+                const formattedDate = dateObj.toLocaleDateString('pt-BR');
+                
+                // Determinar ícone do serviço
+                let serviceIcon = 'fas fa-cut';
+                if (appointment.service === 'unhas') serviceIcon = 'fas fa-hand-sparkles';
+                if (appointment.service === 'sobrancelha') serviceIcon = 'fas fa-eye';
+                if (appointment.service === 'cilios') serviceIcon = 'fas fa-eye-lash';
+                
+                // Determinar texto do status
+                let statusText = 'Pendente';
+                let statusClass = 'status-pending';
+                if (appointment.status === 'confirmed') {
+                    statusText = 'Confirmado';
+                    statusClass = 'status-confirmed';
+                } else if (appointment.status === 'canceled') {
+                    statusText = 'Cancelado';
+                    statusClass = 'status-canceled';
+                } else if (appointment.status === 'completed') {
+                    statusText = 'Concluído';
+                    statusClass = 'status-completed';
+                }
+                
+                // Inicial do cliente
+                const clientInitial = appointment.clientName.split(' ')[0].charAt(0) + 
+                                    (appointment.clientName.split(' ')[1] ? appointment.clientName.split(' ')[1].charAt(0) : '');
+                
+                // Criar linha da tabela
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>
+                        <div class="client-info">
+                            <div class="client-avatar">${clientInitial}</div>
+                            <div class="client-details">
+                                <h4>${appointment.clientName}</h4>
+                                <p>${appointment.clientPhone}</p>
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="service-info">
+                            <div class="service-icon">
+                                <i class="${serviceIcon}"></i>
+                            </div>
+                            <div class="service-details">
+                                <h4>${appointment.serviceName}</h4>
+                                <p>${appointment.duration}</p>
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <strong>${formattedDate}</strong><br>
+                        <span>${appointment.time}</span>
+                    </td>
+                    <td>
+                        <span class="status-badge ${statusClass}">${statusText}</span>
+                    </td>
+                    <td>
+                        <div class="action-buttons">
+                            <button class="action-btn view" title="Ver detalhes" onclick="viewAppointment(${appointment.id})">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                            ${appointment.status === 'pending' ? `
+                                <button class="action-btn confirm" title="Confirmar" onclick="confirmAppointment(${appointment.id})">
+                                    <i class="fas fa-check"></i>
+                                </button>
+                                <button class="action-btn cancel" title="Cancelar" onclick="cancelAppointment(${appointment.id})">
+                                    <i class="fas fa-times"></i>
+                                </button>
+                            ` : ''}
+                            ${appointment.status === 'confirmed' ? `
+                                <button class="action-btn complete" title="Marcar como concluído" onclick="completeAppointment(${appointment.id})">
+                                    <i class="fas fa-check-double"></i>
+                                </button>
+                            ` : ''}
+                        </div>
+                    </td>
+                `;
+                
+                appointmentsList.appendChild(row);
+            });
+            
+            // Atualizar contadores
+            pendingCount.textContent = pending;
+            confirmedCount.textContent = confirmed;
+            canceledCount.textContent = canceled;
+        }
+
+        // Função para visualizar detalhes do agendamento
+        function viewAppointment(id) {
+            currentAppointment = appointments.find(a => a.id === id);
+            
+            // Preencher detalhes no modal
+            const dateObj = new Date(currentAppointment.date);
+            const formattedDate = dateObj.toLocaleDateString('pt-BR');
+            
+            modalDetails.innerHTML = `
+                <div class="detail-row">
+                    <div class="detail-label">Cliente:</div>
+                    <div class="detail-value">${currentAppointment.clientName}</div>
+                </div>
+                <div class="detail-row">
+                    <div class="detail-label">Contato:</div>
+                    <div class="detail-value">${currentAppointment.clientPhone}<br>${currentAppointment.clientEmail}</div>
+                </div>
+                <div class="detail-row">
+                    <div class="detail-label">Serviço:</div>
+                    <div class="detail-value">${currentAppointment.serviceName}<br>Duração: ${currentAppointment.duration}</div>
+                </div>
+                <div class="detail-row">
+                    <div class="detail-label">Data e Hora:</div>
+                    <div class="detail-value">${formattedDate} às ${currentAppointment.time}</div>
+                </div>
+                <div class="detail-row">
+                    <div class="detail-label">Valor:</div>
+                    <div class="detail-value">${currentAppointment.price}</div>
+                </div>
+                <div class="detail-row">
+                    <div class="detail-label">Observações:</div>
+                    <div class="detail-value">${currentAppointment.notes || 'Nenhuma observação'}</div>
+                </div>
+            `;
+            
+            // Configurar ações no modal
+            let actionsHTML = '';
+            if (currentAppointment.status === 'pending') {
+                actionsHTML = `
+                    <button class="btn btn-success" onclick="confirmAppointment(${currentAppointment.id}); closeModalFunc();">Confirmar</button>
+                    <button class="btn btn-danger" onclick="cancelAppointment(${currentAppointment.id}); closeModalFunc();">Cancelar</button>
+                    <button class="btn btn-secondary" onclick="closeModalFunc()">Fechar</button>
+                `;
+            } else if (currentAppointment.status === 'confirmed') {
+                actionsHTML = `
+                    <button class="btn btn-success" onclick="completeAppointment(${currentAppointment.id}); closeModalFunc();">Marcar como Concluído</button>
+                    <button class="btn btn-danger" onclick="cancelAppointment(${currentAppointment.id}); closeModalFunc();">Cancelar</button>
+                    <button class="btn btn-secondary" onclick="closeModalFunc()">Fechar</button>
+                `;
+            } else {
+                actionsHTML = `
+                    <button class="btn btn-secondary" onclick="closeModalFunc()">Fechar</button>
+                `;
+            }
+            
+            modalActions.innerHTML = actionsHTML;
+            
+            // Mostrar modal
+            appointmentModal.style.display = 'flex';
+        }
+
+        // Função para confirmar agendamento
+        function confirmAppointment(id) {
+            const appointment = appointments.find(a => a.id === id);
+            if (appointment && appointment.status === 'pending') {
+                appointment.status = 'confirmed';
+                renderAppointments();
+                showNotification('Agendamento confirmado com sucesso!', 'success');
+            }
+        }
+
+        // Função para cancelar agendamento
+        function cancelAppointment(id) {
+            if (confirm('Tem certeza que deseja cancelar este agendamento?')) {
+                const appointment = appointments.find(a => a.id === id);
+                if (appointment) {
+                    appointment.status = 'canceled';
+                    renderAppointments();
+                    showNotification('Agendamento cancelado com sucesso!', 'error');
+                }
+            }
+        }
+
+        // Função para marcar como concluído
+        function completeAppointment(id) {
+            const appointment = appointments.find(a => a.id === id);
+            if (appointment && appointment.status === 'confirmed') {
+                appointment.status = 'completed';
+                renderAppointments();
+                showNotification('Agendamento marcado como concluído!', 'success');
+            }
+        }
+
+        // Função para fechar modal
+        function closeModalFunc() {
+            appointmentModal.style.display = 'none';
+        }
+
+        // Função para aplicar filtros
+        function applyFiltersFunc() {
+            const dateFilter = filterDate.value;
+            const statusFilter = filterStatus.value;
+            const serviceFilter = filterService.value;
+            
+            filteredAppointments = appointments.filter(appointment => {
+                // Filtro por data
+                if (dateFilter && appointment.date !== dateFilter) {
+                    return false;
+                }
+                
+                // Filtro por status
+                if (statusFilter !== 'all' && appointment.status !== statusFilter) {
+                    return false;
+                }
+                
+                // Filtro por serviço
+                if (serviceFilter !== 'all' && appointment.service !== serviceFilter) {
+                    return false;
+                }
+                
+                return true;
+            });
+            
+            renderAppointments();
+            showNotification('Filtros aplicados com sucesso!', 'success');
+        }
+
+        // Função para resetar filtros
+        function resetFiltersFunc() {
+            filterDate.value = today;
+            filterStatus.value = 'all';
+            filterService.value = 'all';
+            filteredAppointments = [...appointments];
+            renderAppointments();
+            showNotification('Filtros resetados com sucesso!', 'success');
+        }
+
+        // Função para mostrar notificação
+        function showNotification(message, type) {
+            // Criar elemento de notificação
+            const notification = document.createElement('div');
+            notification.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                padding: 15px 25px;
+                border-radius: 8px;
+                color: white;
+                font-weight: 600;
+                z-index: 1000;
+                box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+                animation: slideIn 0.3s ease;
+            `;
+            
+            if (type === 'success') {
+                notification.style.backgroundColor = '#2e7d32';
+            } else {
+                notification.style.backgroundColor = '#c62828';
+            }
+            
+            notification.textContent = message;
+            document.body.appendChild(notification);
+            
+            // Remover notificação após 3 segundos
+            setTimeout(() => {
+                notification.style.animation = 'slideOut 0.3s ease';
+                setTimeout(() => {
+                    document.body.removeChild(notification);
+                }, 300);
+            }, 3000);
+            
+            // Adicionar estilos de animação
+            const style = document.createElement('style');
+            style.textContent = `
+                @keyframes slideIn {
+                    from { transform: translateX(100%); opacity: 0; }
+                    to { transform: translateX(0); opacity: 1; }
+                }
+                @keyframes slideOut {
+                    from { transform: translateX(0); opacity: 1; }
+                    to { transform: translateX(100%); opacity: 0; }
+                }
+            `;
+            document.head.appendChild(style);
+        }
+
+        // Event Listeners
+        closeModal.addEventListener('click', closeModalFunc);
+        applyFilters.addEventListener('click', applyFiltersFunc);
+        resetFilters.addEventListener('click', resetFiltersFunc);
+
+        // Fechar modal ao clicar fora dele
+        window.addEventListener('click', (event) => {
+            if (event.target === appointmentModal) {
+                closeModalFunc();
+            }
+        });
+
+        // Inicializar renderização
+        renderAppointments();
+    </script>
+</body>
+</html>
