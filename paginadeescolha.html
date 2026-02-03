@@ -1,0 +1,677 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Salão Beleza & Estética - Agendamento</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f9f5f0;
+            color: #5a4a42;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        header {
+            background: linear-gradient(to right, #d4a5a5, #f9d6c1);
+            padding: 20px 0;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 10px;
+        }
+
+        .logo i {
+            font-size: 2.5rem;
+            color: #9c6a5b;
+            margin-right: 15px;
+        }
+
+        .logo h1 {
+            font-size: 2.2rem;
+            color: #5a4a42;
+        }
+
+        nav ul {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+            flex-wrap: wrap;
+        }
+
+        nav li {
+            margin: 0 15px;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #5a4a42;
+            font-weight: 600;
+            font-size: 1.1rem;
+            padding: 5px 0;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: #9c6a5b;
+            border-bottom: 2px solid #9c6a5b;
+        }
+
+        .hero {
+            background: linear-gradient(rgba(90, 74, 66, 0.8), rgba(90, 74, 66, 0.8)), url('https://images.unsplash.com/photo-1560066984-138dadb4c035?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            text-align: center;
+            padding: 80px 20px;
+            margin-bottom: 40px;
+        }
+
+        .hero h2 {
+            font-size: 2.8rem;
+            margin-bottom: 20px;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 30px;
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: #d4a5a5;
+            color: white;
+            padding: 12px 30px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+
+        .btn:hover {
+            background-color: #9c6a5b;
+            transform: translateY(-3px);
+        }
+
+        .services {
+            padding: 60px 0;
+            text-align: center;
+        }
+
+        .section-title {
+            font-size: 2.2rem;
+            color: #5a4a42;
+            margin-bottom: 20px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            width: 70%;
+            height: 3px;
+            background-color: #d4a5a5;
+            bottom: -10px;
+            left: 15%;
+        }
+
+        .section-subtitle {
+            color: #8a7a72;
+            font-size: 1.1rem;
+            max-width: 700px;
+            margin: 0 auto 50px;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .service-card {
+            background-color: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.08);
+            transition: transform 0.3s, box-shadow 0.3s;
+            padding-bottom: 25px;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.12);
+        }
+
+        .service-icon {
+            background-color: #f9d6c1;
+            height: 120px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+
+        .service-icon i {
+            font-size: 3.5rem;
+            color: #9c6a5b;
+        }
+
+        .service-card h3 {
+            font-size: 1.6rem;
+            margin-bottom: 15px;
+            color: #5a4a42;
+        }
+
+        .service-card p {
+            color: #8a7a72;
+            padding: 0 20px;
+            margin-bottom: 20px;
+        }
+
+        .service-price {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #9c6a5b;
+            margin-bottom: 20px;
+        }
+
+        .booking {
+            background-color: #f5ebe6;
+            padding: 60px 0;
+        }
+
+        .booking-form {
+            background-color: white;
+            border-radius: 15px;
+            padding: 40px;
+            max-width: 800px;
+            margin: 0 auto;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.08);
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #5a4a42;
+        }
+
+        .form-group input, .form-group select, .form-group textarea {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #e6d5cb;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+
+        .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+            border-color: #d4a5a5;
+            outline: none;
+        }
+
+        .services-options {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 15px;
+            margin-top: 10px;
+        }
+
+        .service-option {
+            border: 2px solid #e6d5cb;
+            border-radius: 8px;
+            padding: 15px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .service-option:hover {
+            background-color: #f9f5f0;
+        }
+
+        .service-option.selected {
+            border-color: #d4a5a5;
+            background-color: #f9f5f0;
+        }
+
+        .service-option i {
+            font-size: 1.8rem;
+            color: #9c6a5b;
+            margin-bottom: 10px;
+        }
+
+        .service-option span {
+            display: block;
+            font-weight: 600;
+        }
+
+        footer {
+            background-color: #5a4a42;
+            color: #f9d6c1;
+            padding: 40px 0 20px;
+            text-align: center;
+        }
+
+        .footer-content {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            margin-bottom: 30px;
+        }
+
+        .footer-column {
+            flex: 1;
+            min-width: 250px;
+            margin-bottom: 30px;
+            padding: 0 20px;
+        }
+
+        .footer-column h3 {
+            font-size: 1.4rem;
+            margin-bottom: 20px;
+            color: #f9d6c1;
+        }
+
+        .footer-column p, .footer-column a {
+            color: #e6d5cb;
+            margin-bottom: 10px;
+            display: block;
+            text-decoration: none;
+        }
+
+        .footer-column a:hover {
+            color: white;
+        }
+
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            margin-top: 15px;
+        }
+
+        .social-icons a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: #8a7a72;
+            color: white;
+            border-radius: 50%;
+            margin: 0 8px;
+            font-size: 1.2rem;
+            transition: background-color 0.3s;
+        }
+
+        .social-icons a:hover {
+            background-color: #d4a5a5;
+        }
+
+        .copyright {
+            border-top: 1px solid #8a7a72;
+            padding-top: 20px;
+            color: #e6d5cb;
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 768px) {
+            .hero h2 {
+                font-size: 2.2rem;
+            }
+            
+            .hero p {
+                font-size: 1rem;
+            }
+            
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .booking-form {
+                padding: 25px;
+            }
+            
+            .services-options {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 480px) {
+            .services-options {
+                grid-template-columns: 1fr;
+            }
+            
+            nav ul {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            nav li {
+                margin: 5px 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Cabeçalho -->
+    <header>
+        <div class="container">
+            <div class="logo">
+                <i class="fas fa-spa"></i>
+                <h1>Salão Beleza & Estética</h1>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#services">Serviços</a></li>
+                    <li><a href="#booking">Agendamento</a></li>
+                    <li><a href="#contact">Contato</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Seção Hero -->
+    <section class="hero" id="home">
+        <div class="container">
+            <h2>Realce sua beleza natural</h2>
+            <p>No Salão Beleza & Estética, oferecemos serviços especializados em unhas, cabelo, sobrancelha e cílios para que você se sinta ainda mais confiante e radiante.</p>
+            <a href="#booking" class="btn">Agendar Horário</a>
+        </div>
+    </section>
+
+    <!-- Seção de Serviços -->
+    <section class="services" id="services">
+        <div class="container">
+            <h2 class="section-title">Nossos Serviços</h2>
+            <p class="section-subtitle">Oferecemos uma variedade de serviços de beleza com profissionais qualificados e produtos de alta qualidade.</p>
+            
+            <div class="services-grid">
+                <!-- Serviço de Unhas -->
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-hand-sparkles"></i>
+                    </div>
+                    <h3>Unhas</h3>
+                    <p>Manicure, pedicure, alongamento de unhas em gel, nail art e spa para as mãos e pés.</p>
+                    <div class="service-price">A partir de R$ 25</div>
+                    <a href="#booking" class="btn" data-service="unhas">Agendar</a>
+                </div>
+                
+                <!-- Serviço de Cabelo -->
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-cut"></i>
+                    </div>
+                    <h3>Cabelo</h3>
+                    <p>Cortes, coloração, hidratação, luzes, mechas, penteados para eventos especiais.</p>
+                    <div class="service-price">A partir de R$ 40</div>
+                    <a href="#booking" class="btn" data-service="cabelo">Agendar</a>
+                </div>
+                
+                <!-- Serviço de Sobrancelha -->
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-eye"></i>
+                    </div>
+                    <h3>Sobrancelha</h3>
+                    <p>Design de sobrancelhas, henna, micropigmentação e tintura para um olhar marcante.</p>
+                    <div class="service-price">A partir de R$ 20</div>
+                    <a href="#booking" class="btn" data-service="sobrancelha">Agendar</a>
+                </div>
+                
+                <!-- Serviço de Cílios -->
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-eye-lash"></i>
+                    </div>
+                    <h3>Cílios</h3>
+                    <p>Alongamento de cílios fio a fio, volume brasileiro, lifting e tintura para um olhar mais expressivo.</p>
+                    <div class="service-price">A partir de R$ 60</div>
+                    <a href="#booking" class="btn" data-service="cilios">Agendar</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Seção de Agendamento -->
+    <section class="booking" id="booking">
+        <div class="container">
+            <h2 class="section-title">Agendamento Online</h2>
+            <p class="section-subtitle">Preencha o formulário abaixo para agendar seu horário no salão.</p>
+            
+            <div class="booking-form">
+                <form id="appointmentForm">
+                    <div class="form-group">
+                        <label for="name">Nome Completo:</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="phone">Telefone:</label>
+                        <input type="tel" id="phone" name="phone" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="email">E-mail:</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="date">Data desejada:</label>
+                        <input type="date" id="date" name="date" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="time">Horário preferencial:</label>
+                        <select id="time" name="time" required>
+                            <option value="">Selecione um horário</option>
+                            <option value="08:00">08:00</option>
+                            <option value="09:00">09:00</option>
+                            <option value="10:00">10:00</option>
+                            <option value="11:00">11:00</option>
+                            <option value="13:00">13:00</option>
+                            <option value="14:00">14:00</option>
+                            <option value="15:00">15:00</option>
+                            <option value="16:00">16:00</option>
+                            <option value="17:00">17:00</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Selecione o(s) serviço(s) desejado(s):</label>
+                        <div class="services-options">
+                            <div class="service-option" data-service="unhas">
+                                <i class="fas fa-hand-sparkles"></i>
+                                <span>Unhas</span>
+                            </div>
+                            <div class="service-option" data-service="cabelo">
+                                <i class="fas fa-cut"></i>
+                                <span>Cabelo</span>
+                            </div>
+                            <div class="service-option" data-service="sobrancelha">
+                                <i class="fas fa-eye"></i>
+                                <span>Sobrancelha</span>
+                            </div>
+                            <div class="service-option" data-service="cilios">
+                                <i class="fas fa-eye-lash"></i>
+                                <span>Cílios</span>
+                            </div>
+                        </div>
+                        <input type="hidden" id="selectedServices" name="selectedServices">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="notes">Observações adicionais:</label>
+                        <textarea id="notes" name="notes" rows="4" placeholder="Ex: Alergia a algum produto, preferência por profissional, etc."></textarea>
+                    </div>
+                    
+                    <button type="submit" class="btn" style="width: 100%; font-size: 1.2rem; padding: 15px;">Confirmar Agendamento</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Rodapé -->
+    <footer id="contact">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>Salão Beleza & Estética</h3>
+                    <p>Especializados em realçar sua beleza natural com serviços de alta qualidade.</p>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Horário de Funcionamento</h3>
+                    <p>Segunda a Sexta: 8h às 19h</p>
+                    <p>Sábado: 8h às 17h</p>
+                    <p>Domingo: Fechado</p>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Contato</h3>
+                    <p><i class="fas fa-map-marker-alt"></i> Rua das Belezas, 123 - Centro</p>
+                    <p><i class="fas fa-phone"></i> (11) 9999-8888</p>
+                    <p><i class="fas fa-envelope"></i> contato@salaobeleza.com</p>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2023 Salão Beleza & Estética. Todos os direitos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Selecionar serviços no formulário de agendamento
+        document.querySelectorAll('.service-option').forEach(option => {
+            option.addEventListener('click', function() {
+                this.classList.toggle('selected');
+                updateSelectedServices();
+            });
+        });
+
+        // Atualizar campo oculto com serviços selecionados
+        function updateSelectedServices() {
+            const selectedOptions = document.querySelectorAll('.service-option.selected');
+            const selectedServices = Array.from(selectedOptions).map(option => {
+                return option.querySelector('span').textContent;
+            });
+            
+            document.getElementById('selectedServices').value = selectedServices.join(', ');
+        }
+
+        // Preencher automaticamente o serviço quando clicar nos botões "Agendar" dos cards
+        document.querySelectorAll('.service-card .btn').forEach(button => {
+            button.addEventListener('click', function(e) {
+                e.preventDefault();
+                const service = this.getAttribute('data-service');
+                
+                // Remover seleção de todos os serviços
+                document.querySelectorAll('.service-option').forEach(option => {
+                    option.classList.remove('selected');
+                });
+                
+                // Selecionar apenas o serviço clicado
+                const serviceOption = document.querySelector(`.service-option[data-service="${service}"]`);
+                if (serviceOption) {
+                    serviceOption.classList.add('selected');
+                    updateSelectedServices();
+                }
+                
+                // Rolar até o formulário de agendamento
+                document.getElementById('booking').scrollIntoView({ behavior: 'smooth' });
+            });
+        });
+
+        // Configurar data mínima no campo de data (hoje)
+        const today = new Date().toISOString().split('T')[0];
+        document.getElementById('date').min = today;
+
+        // Processar envio do formulário
+        document.getElementById('appointmentForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Coletar dados do formulário
+            const name = document.getElementById('name').value;
+            const selectedServices = document.getElementById('selectedServices').value;
+            const date = document.getElementById('date').value;
+            const time = document.getElementById('time').value;
+            
+            // Validar que pelo menos um serviço foi selecionado
+            if (!selectedServices) {
+                alert('Por favor, selecione pelo menos um serviço.');
+                return;
+            }
+            
+            // Formatar mensagem de confirmação
+            const formattedDate = new Date(date).toLocaleDateString('pt-BR');
+            const confirmationMessage = `
+                Agendamento confirmado!
+                
+                Nome: ${name}
+                Serviços: ${selectedServices}
+                Data: ${formattedDate}
+                Horário: ${time}
+                
+                Entraremos em contato para confirmar o agendamento. Obrigada!
+            `;
+            
+            alert(confirmationMessage);
+            
+            // Limpar formulário
+            this.reset();
+            document.querySelectorAll('.service-option').forEach(option => {
+                option.classList.remove('selected');
+            });
+            document.getElementById('selectedServices').value = '';
+        });
+
+        // Navegação suave para âncoras
+        document.querySelectorAll('nav a').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    targetElement.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
